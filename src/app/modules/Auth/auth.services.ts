@@ -3,15 +3,11 @@ import { UserModel } from "../user/user.model";
 
 const registerUserIntoDB = async ( payload: TUser) => {
 
-    const userData: Partial<TUser> = {};
-    userData.role = 'user';
-    const user = new UserModel(payload);
-    const result = await user.save();
+    const result = await UserModel.create(payload)
     return result;
 
   };
 
-  
   export const AuthServices={
    registerUserIntoDB
 }
