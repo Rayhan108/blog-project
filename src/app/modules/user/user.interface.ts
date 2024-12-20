@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Model } from "mongoose";
 
-export interface TUser {
+export type TUser ={
     name: string;
     email: string;
     password: string;
