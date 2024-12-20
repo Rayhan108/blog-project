@@ -54,7 +54,7 @@ userSchema.pre('save', async function (next) {
     doc.password = '';
     next();
   });
-userSchema.statics.isUserExistsByCustomEmail = async function (email: string) {
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
     return await UserModel.findOne({ email }).select('+password');
   };
 

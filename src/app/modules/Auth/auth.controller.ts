@@ -6,22 +6,17 @@ import catchAsync from "../../utils/catchAsync";
 
 
 const registerUser=async(req:Request,res:Response)=>{
-
-
 const result = await AuthServices.registerUserIntoDB(req.body);
 sendResponse(res, {
     success: true,
     message: 'User registered successfully',
     statusCode: httpStatus.CREATED,
-    data: result,
+    data:result,
   });
 }
 
 const loginUser = catchAsync(async (req, res) => {
     const result = await AuthServices.loginUser(req.body);
-
-  
-  
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
