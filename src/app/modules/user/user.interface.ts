@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+import { Model } from "mongoose";
+
 export interface TUser {
     name: string;
     email: string;
@@ -7,4 +10,6 @@ export interface TUser {
     createdAt: Date;
     updatedAt: Date;
   }
-  
+  export interface User extends Model<TUser>{
+      isUserExistsByCustomId(id: string): Promise<TUser>
+  }
