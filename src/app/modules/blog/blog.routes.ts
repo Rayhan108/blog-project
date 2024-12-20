@@ -16,6 +16,6 @@ router.post(
   validateRequest(blogValidationSchema),
   BlogController.createBlog,
 );
-
+router.get('/', BlogController.getAllBlogs);
 
 export const BlogRoutes = router;
