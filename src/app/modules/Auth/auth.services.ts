@@ -10,6 +10,7 @@ const registerUserIntoDB = async ( payload: TUser) => {
     if (user) {
       throw new AppError(httpStatus.CONFLICT, 'This user is already exists!');
     }
+    
     const result = await UserModel.create(payload)
     return result;
 

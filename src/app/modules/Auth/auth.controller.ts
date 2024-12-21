@@ -5,8 +5,10 @@ import httpStatus from "http-status";
 import catchAsync from "../../utils/catchAsync";
 
 
+
 const registerUser=async(req:Request,res:Response)=>{
 const result = await AuthServices.registerUserIntoDB(req.body);
+
 sendResponse(res, {
     success: true,
     message: 'User registered successfully',

@@ -1,5 +1,5 @@
 import express from 'express';
-import { blogValidationSchema } from './blog.validation';
+import { blogValidationSchema, updateBlogValidationSchema } from './blog.validation';
 import { BlogController } from './blog.controller';
 import validateRequest from '../../middleware/validateRequest';
 import auth from '../../middleware/auth';
@@ -16,6 +16,19 @@ router.post(
   validateRequest(blogValidationSchema),
   BlogController.createBlog,
 );
+router.patch(
+  '/:blogId',
+  auth('user'),
+  validateRequest(updateBlogValidationSchema),
+  BlogController.updateBlogFromDB,
+);
+
 router.get('/', BlogController.getAllBlogs);
+
+
+
+
+
+
 
 export const BlogRoutes = router;

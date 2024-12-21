@@ -14,7 +14,7 @@ const createBlogIntoDB = async ( payload: TBlog,userId:string) => {
     content,
     author: user?._id,
   };
-    const result = await BlogModel.create(blogData)
+    const result = (await BlogModel.create(blogData)).populate('author')
     return result;
 
   };
@@ -27,7 +27,30 @@ const createBlogIntoDB = async ( payload: TBlog,userId:string) => {
     const result = await blogQuery.modelQuery;
     return result;
   };
+
+
+  const updateBlogsIntoDB = async ( id: string,payload: Partial<TBlog>,) => {
+    
+    const result = await BlogModel.findOneAndUpdate({ _id: id }, payload, {
+      new: true,
+    }).populate('author');
+    return result;
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
   export const BlogServices={
 createBlogIntoDB,
-getAllBlogsFromDB
+getAllBlogsFromDB,
+updateBlogsIntoDB,
   }
