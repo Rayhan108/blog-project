@@ -34,14 +34,14 @@ const registerUserIntoDB = async ( payload: TUser) => {
         role: user.role,
       };
 
-        const accessToken = createToken(
+        const Token = createToken(
           jwtPayload,
           config.jwt_access_secret as string,
           config.jwt_access_expires_in as string,
         );
     
         
-      return { accessToken };
+      return { Token };
   };
   
   export const AuthServices={

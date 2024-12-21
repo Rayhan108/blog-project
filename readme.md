@@ -19,10 +19,10 @@ my application is a Node.js and Express based web application using typescript,e
 ## **Important Links**
 
 
-**Live Server Link :** 
+**Live Server Link :** https://blog-project-plum-two.vercel.app
 
 
-**Vedio Link :** 
+**Vedio Link :** https://drive.google.com/file/d/1buGs1N4NDeGLkgh2PEWih-T1xOxMb4P7/view?usp=drive_link
 
 
 

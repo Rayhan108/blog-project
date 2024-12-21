@@ -34,7 +34,7 @@ const updateBlogFromDB = async (req: Request, res: Response) => {
   const existingBlog = await BlogModel.findById(id);
   
   if (!existingBlog) {
-    return res.status(httpStatus.NOT_FOUND).json({
+     res.status(httpStatus.NOT_FOUND).json({
       success: false,
       message: 'Blog Not Found',
     });
@@ -48,7 +48,7 @@ const updateBlogFromDB = async (req: Request, res: Response) => {
 // console.log(author?._id.toString());
 
   if (existingBlog?.author.toString() !== author?._id.toString()) {
-    return res.status(httpStatus.FORBIDDEN).json({
+     res.status(httpStatus.FORBIDDEN).json({
       success: false,
       message: 'You are not authorized to update this blog',
     });
@@ -73,7 +73,7 @@ const deleteBlog =async (req: Request, res: Response)=>{
   const existingBlog = await BlogModel.findById(id);
 
   if (!existingBlog) {
-    return res.status(httpStatus.NOT_FOUND).json({
+     res.status(httpStatus.NOT_FOUND).json({
       success: false,
       message: 'Blog Not Found',
     });
@@ -86,7 +86,7 @@ const deleteBlog =async (req: Request, res: Response)=>{
 // console.log(author?._id.toString());
 
   if (existingBlog?.author.toString() !== author?._id.toString()) {
-    return res.status(httpStatus.FORBIDDEN).json({
+     res.status(httpStatus.FORBIDDEN).json({
       success: false,
       message: 'You are not authorized to delete this blog',
     });

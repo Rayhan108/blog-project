@@ -11,7 +11,7 @@ const blogUser =async (req: Request, res: Response)=>{
     const existingUser = await UserModel.findById(userId);
   
     if (!existingUser) {
-        return res.status(httpStatus.NOT_FOUND).json({
+         res.status(httpStatus.NOT_FOUND).json({
             success: false,
             message: 'User not found',
           });
@@ -35,7 +35,7 @@ const blogUser =async (req: Request, res: Response)=>{
     const existingBlog = await BlogModel.findById(id);
   
     if (!existingBlog) {
-        return res.status(httpStatus.NOT_FOUND).json({
+         res.status(httpStatus.NOT_FOUND).json({
             success: false,
             message: 'Blog not found',
           });
