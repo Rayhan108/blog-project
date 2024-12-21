@@ -32,9 +32,4 @@ router.delete(
 router.get('/', BlogController.getAllBlogs);
 
 
-
-
-
-
-
 export const BlogRoutes = router;

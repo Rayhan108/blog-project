@@ -4,7 +4,6 @@ import { BlogServices } from './blog.services';
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import { BlogModel } from './blog.model';
-import AppError from '../../errors/AppError';
 import { UserModel } from '../user/user.model';
 
 const createBlog = async (req: Request, res: Response) => {
@@ -35,7 +34,12 @@ const updateBlogFromDB = async (req: Request, res: Response) => {
   const existingBlog = await BlogModel.findById(id);
   
   if (!existingBlog) {
-    throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
+    return res.status(httpStatus.NOT_FOUND).json({
+      success: false,
+      message: 'Blog Not Found',
+    });
+    // throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
+
   }
   const{ userId }= req.user
   const author = await UserModel.findOne({email:userId});
@@ -69,7 +73,11 @@ const deleteBlog =async (req: Request, res: Response)=>{
   const existingBlog = await BlogModel.findById(id);
 
   if (!existingBlog) {
-    throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
+    return res.status(httpStatus.NOT_FOUND).json({
+      success: false,
+      message: 'Blog Not Found',
+    });
+    // throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
   }
   const{ userId }= req.user
   const author = await UserModel.findOne({email:userId});

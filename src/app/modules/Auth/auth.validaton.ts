@@ -12,6 +12,18 @@ const registerUserValidationSchema = z.object({
         updatedAt: z.date().default(() => new Date()),
     })
 })
+
+const updateRegisterUserValidationSchema = z.object({
+    body: z.object({
+
+        name: z.string().optional(),
+        email: z.string().optional(),
+        password: z.string().optional(),
+        role: z.enum(["admin", "user"]).optional(),
+        isBlocked: z.boolean().default(false).optional(),
+    })
+})
+
 const loginValidationSchema = z.object({
     body: z.object({
       email: z.string({ required_error: 'email is required.' }),
@@ -20,5 +32,6 @@ const loginValidationSchema = z.object({
   });
 export const AuthValidation = {
   registerUserValidationSchema,
-  loginValidationSchema
+  loginValidationSchema,
+  updateRegisterUserValidationSchema
   };
