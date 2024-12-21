@@ -17,10 +17,16 @@ router.post(
   BlogController.createBlog,
 );
 router.patch(
-  '/:blogId',
+  '/:id',
   auth('user'),
   validateRequest(updateBlogValidationSchema),
   BlogController.updateBlogFromDB,
+);
+router.delete(
+  '/:id',
+  auth('user'),
+  validateRequest(updateBlogValidationSchema),
+  BlogController.deleteBlog,
 );
 
 router.get('/', BlogController.getAllBlogs);

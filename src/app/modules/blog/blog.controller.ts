@@ -30,17 +30,16 @@ const getAllBlogs = catchAsync(async (req, res) => {
 
 
 const updateBlogFromDB = async (req: Request, res: Response) => {
-  const { blogId } = req.params;
+  const { id } = req.params;
 
-  const{ userId }= req.user
-
-  // Fetch the blog first to verify ownership
-  const existingBlog = await BlogModel.findById(blogId);
-  const author = await UserModel.findOne({email:userId});
-
+  const existingBlog = await BlogModel.findById(id);
+  
   if (!existingBlog) {
     throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
   }
+  const{ userId }= req.user
+  const author = await UserModel.findOne({email:userId});
+
 // console.log(existingBlog?.author.toString());
 // console.log(author?._id.toString());
 
@@ -50,10 +49,8 @@ const updateBlogFromDB = async (req: Request, res: Response) => {
       message: 'You are not authorized to update this blog',
     });
   }
-
-
   const result = await BlogServices.updateBlogsIntoDB(
-    blogId,
+   id,
     req.body,
   );
 
@@ -66,7 +63,42 @@ const updateBlogFromDB = async (req: Request, res: Response) => {
 };
 
 
+const deleteBlog =async (req: Request, res: Response)=>{
+  const { id } = req.params;
 
+  const existingBlog = await BlogModel.findById(id);
+
+  if (!existingBlog) {
+    throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
+  }
+  const{ userId }= req.user
+  const author = await UserModel.findOne({email:userId});
+
+// console.log(existingBlog?.author.toString());
+// console.log(author?._id.toString());
+
+  if (existingBlog?.author.toString() !== author?._id.toString()) {
+    return res.status(httpStatus.FORBIDDEN).json({
+      success: false,
+      message: 'You are not authorized to delete this blog',
+    });
+  }
+
+  // const result =
+   await BlogServices.deleteBlogFromDB(id);
+   
+  //  sendResponse(res, {
+  //    success: true,
+  //    message: 'Blog deleted successfully',
+  //    statusCode: httpStatus.OK,
+  //    data:result,
+  //  });
+   res.status(httpStatus.OK).json({
+    success: true,
+    message: 'Blog deleted successfully',
+    "statusCode": httpStatus.OK,
+  });
+};
 
 
 
@@ -77,4 +109,5 @@ export const BlogController = {
   createBlog,
   getAllBlogs,
   updateBlogFromDB,
+  deleteBlog
 };

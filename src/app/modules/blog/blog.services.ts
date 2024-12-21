@@ -37,15 +37,11 @@ const createBlogIntoDB = async ( payload: TBlog,userId:string) => {
     return result;
   };
 
-
-
-
-
-
-
-
-
-
+  const deleteBlogFromDB = async ( id: string) => {
+    // console.log(id);
+    const result = await BlogModel.findByIdAndDelete(id);
+    return result;
+  };
 
 
 
@@ -53,4 +49,5 @@ const createBlogIntoDB = async ( payload: TBlog,userId:string) => {
 createBlogIntoDB,
 getAllBlogsFromDB,
 updateBlogsIntoDB,
+deleteBlogFromDB
   }
