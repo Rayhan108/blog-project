@@ -1,4 +1,5 @@
 # **My Application**
+# *Blog Project*
 my application is a Node.js and Express based web application using typescript,express,mongoose and mongodb database. It is scalable applications with features like API endpoints, database integration, and configuration error handling.I use zod package for  data validation created login,registration create,update and delete blog by user and admin can delete any blog and block any user.I use JWT for authentication and authorization
 
 ---
