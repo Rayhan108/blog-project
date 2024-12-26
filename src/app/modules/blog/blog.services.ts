@@ -7,6 +7,7 @@ import { BlogModel } from "./blog.model";
 const createBlogIntoDB = async ( payload: TBlog,userId:string) => {
 
   const user = await UserModel.findOne({ email: userId });
+ 
   const {title,content}=payload;
 
   const blogData = {

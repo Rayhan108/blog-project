@@ -8,6 +8,9 @@ import { UserModel } from '../user/user.model';
 
 const createBlog = async (req: Request, res: Response) => {
   const { userId } = req.user;
+ 
+  // const user = await UserModel.findOne({email:userId});
+  // console.log(user)
   const result = await BlogServices.createBlogIntoDB(req.body, userId);
   sendResponse(res, {
     success: true,
@@ -30,6 +33,7 @@ const getAllBlogs = catchAsync(async (req, res) => {
 
 const updateBlogFromDB = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const{ userId }= req.user
 
   const existingBlog = await BlogModel.findById(id);
   
@@ -41,18 +45,27 @@ const updateBlogFromDB = async (req: Request, res: Response) => {
     // throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
 
   }
-  const{ userId }= req.user
+
   const author = await UserModel.findOne({email:userId});
 
+
 // console.log(existingBlog?.author.toString());
-// console.log(author?._id.toString());
+
 
   if (existingBlog?.author.toString() !== author?._id.toString()) {
      res.status(httpStatus.FORBIDDEN).json({
       success: false,
       message: 'You are not authorized to update this blog',
     });
+    return;
   }
+  // if (existingBlog?.author.toString() !== author?._id.toString()) {
+  //    res.status(httpStatus.FORBIDDEN).json({
+  //     success: false,
+  //     message: 'You are not authorized to update this blog',
+  //   });
+  //   return;
+  // }
   const result = await BlogServices.updateBlogsIntoDB(
    id,
     req.body,
